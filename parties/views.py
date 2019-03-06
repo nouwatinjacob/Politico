@@ -24,20 +24,20 @@ class PartyList(APIView):
             return Response({"status": 201, "data": serializer.data}, status=status.HTTP_201_CREATED)
         return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-# class PartyDetail(APIView):
-#     """
-#     Retrieve, update or delete a party instance.
-#     """
-#     def get_object(self, pk):
-#         try:
-#             return Party.objects.get(pk=pk)
-#         except Party.DoesNotExist:
-#             raise Http404
+class PartyDetail(APIView):
+    """
+    Retrieve, update or delete a party instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Party.objects.get(pk=pk)
+        except Party.DoesNotExist:
+            raise Http404
 
-#     def get(self, request, pk, format=None):
-#         parties = self.get_object(pk)
-#         serializer = PartySerializer(parties)
-#         return Response({"status": 200, "data": serializer.data})
+    def get(self, request, pk, format=None):
+        parties = self.get_object(pk)
+        serializer = PartySerializer(parties)
+        return Response({"status": 200, "data": serializer.data})
 
 #     def put(self, request, pk, format=None):
 #         party = self.get_object(pk)
