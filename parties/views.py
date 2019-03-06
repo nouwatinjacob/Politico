@@ -12,10 +12,10 @@ class PartyList(APIView):
     """
     List all parties, or create a new snippet.
     """
-    # def get(self, request, format=None):
-    #     parties = Party.objects.all()
-    #     serializer = PartySerializer(parties, many=True)
-    #     return Response({ "status": 200, "data": serializer.data})
+    def get(self, request, format=None):
+        parties = Party.objects.all()
+        serializer = PartySerializer(parties, many=True)
+        return Response({ "status": 200, "data": serializer.data})
 
     def post(self, request, format=None):
         serializer = PartySerializer(data=request.data)
