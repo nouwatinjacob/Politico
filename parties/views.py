@@ -47,7 +47,7 @@ class PartyDetail(APIView):
             return Response({"status": 200, "data": serializer.data})
         return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-#     def delete(self, request, pk, format=None):
-#         party = self.get_object(pk)
-#         party.delete()
-#         return Response({"status": 200, "data": [{"message": "party successfully deleted"}]}, status=status.HTTP_200_OK)
+    def delete(self, request, pk, format=None):
+        party = self.get_object(pk)
+        party.delete()
+        return Response({"status": 200, "data": [{"message": "party successfully deleted"}]}, status=status.HTTP_200_OK)
