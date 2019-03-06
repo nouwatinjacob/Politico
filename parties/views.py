@@ -39,13 +39,13 @@ class PartyDetail(APIView):
         serializer = PartySerializer(parties)
         return Response({"status": 200, "data": serializer.data})
 
-#     def put(self, request, pk, format=None):
-#         party = self.get_object(pk)
-#         serializer = PartySerializer(party, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response({"status": 200, "data": serializer.data})
-#         return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    def put(self, request, pk, format=None):
+        party = self.get_object(pk)
+        serializer = PartySerializer(party, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": 200, "data": serializer.data})
+        return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
 #     def delete(self, request, pk, format=None):
 #         party = self.get_object(pk)
