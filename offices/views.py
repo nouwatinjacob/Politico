@@ -16,4 +16,9 @@ class OfficeList(APIView):
         if serializer.is_valid():
             serializer.save()
             return Response({"status": 201, "data": serializer.data}, status=status.HTTP_201_CREATED)
-        return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST) 
+        return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def get(self, request, format=None):
+        offices = Office.objects.all()
+        serializer = OfficeSerializer(offices, many=True)
+        return Response({"status": 200, "data": serializer.data})
