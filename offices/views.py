@@ -37,3 +37,11 @@ class OfficeDetail(APIView):
         office = self.get_object(pk)
         serializer = OfficeSerializer(office)
         return Response({"status": 200, "data": serializer.data})
+
+    def patch(self, request, pk, format=None):
+        office = self.get_object(pk)
+        serializer = OfficeSerializer(office, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"status": 200, "data": serializer.data})
+        return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
