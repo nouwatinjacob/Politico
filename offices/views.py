@@ -45,3 +45,8 @@ class OfficeDetail(APIView):
             serializer.save()
             return Response({"status": 200, "data": serializer.data})
         return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        office = self.get_object(pk)
+        office.delete()
+        return Response({"status": 200, "data": [{"message": "office successfully deleted"}]}, status=status.HTTP_200_OK)
