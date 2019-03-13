@@ -22,3 +22,18 @@ class OfficeList(APIView):
         offices = Office.objects.all()
         serializer = OfficeSerializer(offices, many=True)
         return Response({"status": 200, "data": serializer.data})
+
+class OfficeDetail(APIView):
+    """
+    Retrieve, update or delete a office instance.
+    """
+    def get_object(self, pk):
+        try:
+            return Office.objects.get(pk=pk)
+        except Office.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        office = self.get_object(pk)
+        serializer = OfficeSerializer(office)
+        return Response({"status": 200, "data": serializer.data})
