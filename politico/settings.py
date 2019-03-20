@@ -41,7 +41,18 @@ INSTALLED_APPS = [
     'parties',
     'offices',
     'authentication',
+    'rest_framework.authtoken',
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,7 +91,7 @@ WSGI_APPLICATION = 'politico.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',                      
+        'NAME': 'politico',                      
         'USER': 'postgres',
         'PASSWORD': '',
         'HOST': 'localhost',
