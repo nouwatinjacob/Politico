@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'offices',
     'authentication',
     'rest_framework.authtoken',
+    'votes'
 ]
 
 REST_FRAMEWORK = {
