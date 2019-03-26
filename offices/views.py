@@ -5,8 +5,10 @@ from rest_framework.response import Response
 from django.http import Http404
 from rest_framework import status
 
-from .models import Office
-from .serializers import OfficeSerializer
+from django.db import IntegrityError
+
+from .models import OfficeModel, Candidate
+from .serializers import OfficeSerializer, CandidateSerializer
 
 # Create your views here.
 
@@ -19,7 +21,7 @@ class OfficeList(APIView):
         return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
     def get(self, request, format=None):
-        offices = Office.objects.all()
+        offices = OfficeModel.objects.all()
         serializer = OfficeSerializer(offices, many=True)
         return Response({"status": 200, "data": serializer.data})
 
@@ -29,8 +31,8 @@ class OfficeDetail(APIView):
     """
     def get_object(self, pk):
         try:
-            return Office.objects.get(pk=pk)
-        except Office.DoesNotExist:
+            return OfficeModel.objects.get(pk=pk)
+        except OfficeModel.DoesNotExist:
             raise Http404
 
     def get(self, request, pk, format=None):
@@ -50,3 +52,15 @@ class OfficeDetail(APIView):
         office = self.get_object(pk)
         office.delete()
         return Response({"status": 200, "data": [{"message": "office successfully deleted"}]}, status=status.HTTP_200_OK)
+
+
+class CandidateView(APIView):
+    def post(self, request, **kwargs):
+        serializer = CandidateSerializer(data=request.data)
+        if serializer.is_valid():
+            try:
+                serializer.save(user=self.request.user)
+                return Response({"status": 201, "data": serializer.data})
+            except IntegrityError:
+                return Response({"status":400, "error": "You have applied for this office"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"status":400, "error": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
