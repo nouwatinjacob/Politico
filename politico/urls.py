@@ -21,4 +21,5 @@ urlpatterns = [
     re_path(r'^', include('parties.urls')),
     re_path(r'^', include('offices.urls')),
     re_path(r'^', include('authentication.urls')),
+    re_path(r'^', include('votes.urls')),
 ]
