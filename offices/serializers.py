@@ -10,7 +10,7 @@ class OfficeSerializer(serializers.ModelSerializer):
         model = OfficeModel
         fields = '__all__'
         extra_kwargs = {
-            "name": {"required": True, }
+            "name": {"required": True, "allow_null": False }
         }
 
 class CandidateSerializer(serializers.ModelSerializer):
@@ -18,4 +18,3 @@ class CandidateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Candidate
         fields = ('office', 'user')
-        
