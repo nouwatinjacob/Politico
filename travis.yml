@@ -1,0 +1,38 @@
+language: python
+
+python:
+  - "3.6.5"
+
+services: 
+  - postgresql
+
+addons:
+  postgresql: "9.4"
+
+env:
+  - DJANGO=2.1.5
+
+before_install:
+  - export DJANGO_SETTINGS_MODULE=politico.settings
+  - export PYTHONPATH=$HOME/builds/nouwatinjacob/Politico
+  - export PIP_USE_MIRRORS=true
+
+# install requirements
+install:
+  - make pip-install
+  - pip install django==$DJANGO --quiet
+  - pip install psycopg2 --quiet
+
+before_script:
+  - psql -c "CREATE DATABASE politico;" -U postgres
+  - make migrations
+  - make migrate
+
+# command to run tests
+script:
+  - python3 manage.py collectstatic --noinput --settings=politico.settings
+  - coverage run --source=. politico/manage.py test politico/api --noinput --settings=politico.settings
+
+# send coverage report to coveralls
+after_success:
+  - coveralls
