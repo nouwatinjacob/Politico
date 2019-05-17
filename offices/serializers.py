@@ -17,4 +17,4 @@ class CandidateSerializer(serializers.ModelSerializer):
     user = serializers.ReadOnlyField(source='user.id')
     class Meta:
         model = Candidate
-        fields = ('office', 'user')
+        fields = ('id','office', 'user')
