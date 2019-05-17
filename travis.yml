@@ -6,9 +6,6 @@ python:
 services: 
   - postgresql
 
-addons:
-  postgresql: "9.4"
-
 env:
   - DJANGO=2.1.5
 
@@ -31,7 +28,7 @@ before_script:
 # command to run tests
 script:
   - python3 manage.py collectstatic --noinput --settings=politico.settings
-  - coverage run --source=. politico/manage.py test politico/api --noinput --settings=politico.settings
+  - coverage run --source=. manage.py test --noinput --settings=politico.settings
 
 # send coverage report to coveralls
 after_success:

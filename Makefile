@@ -17,3 +17,5 @@ runserver:
 
 test:
 	$(PYTHON_MANAGE) test
+	coverage report
+	coverage html
