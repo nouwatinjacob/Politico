@@ -28,7 +28,7 @@ before_script:
 # command to run tests
 script:
   - python3 manage.py collectstatic --noinput --settings=politico.settings
-  - coverage run --source=. manage.py test --noinput --settings=politico.settings
+  - coverage run --source=. Politico/manage.py test --noinput --settings=Politico.settings
 
 # send coverage report to coveralls
 after_success:
