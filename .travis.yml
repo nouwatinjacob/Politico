@@ -1,13 +1,13 @@
 language: python
 
 python:
-  - "3.6.5"
+  - "3.6.8"
 
 services: 
   - postgresql
 
 addons:
-  postgresql: "9.4"
+  postgresql: "12.4"
 
 env:
   - DJANGO=2.1.5
