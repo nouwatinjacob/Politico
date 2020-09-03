@@ -1,5 +1,5 @@
 .vscode/
-.env
+.env/
 politico/authentication/__pycache__/
 politico/authentication/migrations/__pycache__/
 politico/offices/__pycache__/
@@ -9,5 +9,6 @@ politico/__pycache__/
 __pycache__/
 *.pyc
 .DS_Store
-.coverage
+.coveragerc/
 htmlcov
+env/
