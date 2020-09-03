@@ -1,5 +1,5 @@
 .vscode/
-.env/
+.env
 politico/authentication/__pycache__/
 politico/authentication/migrations/__pycache__/
 politico/offices/__pycache__/
